@@ -1,4 +1,4 @@
-package com.dqtechnologies.myapp2023
+package com.linoop.myapp2023
 
 import org.junit.Test
 

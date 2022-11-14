@@ -1,7 +1,8 @@
-package com.dqtechnologies.myapp2023
+package com.linoop.myapp2023.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.linoop.myapp2023.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
