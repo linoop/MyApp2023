@@ -11,6 +11,12 @@ class NetworkUtil (private val name: String) {
 
 }
 
+object MyObject{
+    fun printName(){
+        println("Linoop")
+    }
+}
+
 
 class NetConnection{
 
