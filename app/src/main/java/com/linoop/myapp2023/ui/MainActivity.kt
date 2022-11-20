@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun collectData() {
+
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.response.collectLatest {
                 binding.status.text = it.toString()
