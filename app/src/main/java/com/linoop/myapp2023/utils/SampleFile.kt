@@ -11,6 +11,9 @@ class NetworkUtil (private val name: String) {
 
 }
 
+fun interface Calculate {
+    fun cal(a: Int, b: Int): Int
+}
 
 class NetConnection{
 
@@ -26,7 +29,10 @@ class NetConnection{
 
 
 fun main() {
-    val networkUtil = NetworkUtil("Linoop")
+    /*val networkUtil = NetworkUtil("Linoop")
     networkUtil.printConnection("Connection type")
     println("Hi")
+*/
+    val calculate = Calculate { a, b ->  a+b }
+    println(calculate.cal(10, 20))
 }

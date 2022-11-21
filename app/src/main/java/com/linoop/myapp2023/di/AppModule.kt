@@ -1,45 +1,29 @@
 package com.linoop.myapp2023.di
 
-import com.linoop.myapp2023.models.DefaultResponse
-import com.linoop.myapp2023.models.MyData
-import com.linoop.myapp2023.network.Api
-import com.linoop.myapp2023.network.MyRetrofit
+import android.content.Context
+import androidx.room.Room
+import com.linoop.myapp2023.storage.MyDao
 import com.linoop.myapp2023.storage.MyDatabase
-import dagger.Binds
+import com.linoop.myapp2023.utils.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import javax.inject.Inject
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
+    @Singleton
     @Provides
-    fun providesMyDatabase(): MyDatabase = MyDatabase()
+    fun provideRoomDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, MyDatabase::class.java, DATABASE_NAME).build()
 
+    @Singleton
+    @Provides
+    fun provideMyDao(myDatabase: MyDatabase) = myDatabase.getMyDao()
 }
 
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class NetworkApis {
-    @Binds
-    abstract fun bindApi(apiImpl: ApiImpl): Api
-}
 
-class ApiImpl @Inject constructor(
-    @RetrofitFirstServer private val firstServer: MyRetrofit,
-    @RetrofitSecondServer private val secondServer: MyRetrofit
-    ) : Api {
-    override fun downloadData(): DefaultResponse {
-        return DefaultResponse(
-            status = true,
-            message = "Downloaded successfully con: ${firstServer.connection}"
-        )
-    }
-
-    override fun uploadData(myData: MyData): DefaultResponse {
-        return DefaultResponse(true, "Uploaded successfully, con: ${secondServer.connection}, Data${myData.data}")
-    }
-}

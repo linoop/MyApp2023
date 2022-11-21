@@ -2,11 +2,9 @@ package com.linoop.myapp2023.repository
 
 import com.linoop.myapp2023.models.MyData
 import com.linoop.myapp2023.network.Api
+import com.linoop.myapp2023.storage.MyDao
 import javax.inject.Inject
 
-class MyRepo @Inject constructor(private val api: Api) {
-    fun downloadData() = api.downloadData()
+class MyRepo @Inject constructor(private val api: Api, private val myDao: MyDao) {
 
-
-    fun uploadData(myData: MyData) = api.uploadData(myData)
 }
