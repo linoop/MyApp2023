@@ -5,6 +5,6 @@ import com.linoop.myapp2023.network.Api
 import com.linoop.myapp2023.storage.MyDao
 import javax.inject.Inject
 
-class MyRepo @Inject constructor(private val api: Api, private val myDao: MyDao) {
+class MyRepo @Inject constructor(private val myDao: MyDao) {
 
 }
