@@ -6,15 +6,17 @@ import androidx.room.PrimaryKey
 import com.linoop.myapp2023.utils.Constants.ITEM_TABLE
 
 @Entity(tableName = ITEM_TABLE)
-data class ItemModel(
-    @ColumnInfo(name = "item_code")
-    var code: String = "",
-    @ColumnInfo(name = "item_name")
+data class UserModel(
+    @ColumnInfo(name = "name")
     var name: String = "",
-    @ColumnInfo(name = "price")
-    var price: Double = 0.0,
-    @ColumnInfo(name = "status")
-    var status: Boolean = true,
+    @ColumnInfo(name = "username")
+    var username: String = "",
+    @ColumnInfo(name = "password")
+    var password: String = "",
+    @ColumnInfo(name = "email")
+    var email: String = "",
+    var lastName:String=""
+
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "item_id")

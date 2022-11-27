@@ -1,0 +1,8 @@
+package com.linoop.myapp2023.utils
+
+import android.content.Context
+import android.widget.Toast
+
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}

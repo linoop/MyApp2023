@@ -1,8 +1,17 @@
 package com.linoop.myapp2023.storage
 
-import android.util.Log
-import com.linoop.myapp2023.utils.Constants.TAG
 
-class MyDatabase {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.linoop.myapp2023.models.UserModel
+
+@Database(
+    entities = [UserModel::class],
+    version = 5,
+    exportSchema = true
+)
+abstract class MyDatabase : RoomDatabase() {
+    abstract fun getDataDao(): MyDao
+
 
 }
