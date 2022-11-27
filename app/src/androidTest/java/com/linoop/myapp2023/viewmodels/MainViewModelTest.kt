@@ -1,6 +1,5 @@
 package com.linoop.myapp2023.viewmodels
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -10,8 +9,7 @@ import com.linoop.myapp2023.models.LoginResponse
 import com.linoop.myapp2023.network.Api
 import com.linoop.myapp2023.repository.MyRepo
 import com.linoop.myapp2023.storage.SharedPrefManager
-import com.linoop.myapp2023.utils.Constants.MY_PREF
-import dagger.hilt.android.qualifiers.ApplicationContext
+
 
 
 import junit.framework.TestCase
