@@ -3,9 +3,7 @@ package com.linoop.myapp2023.viewmodels
 import androidx.lifecycle.*
 import com.linoop.myapp2023.models.UserModel
 import com.linoop.myapp2023.repository.MyRepo
-import com.linoop.myapp2023.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -32,7 +30,8 @@ class MainViewModel @Inject constructor(private val myRepo: MyRepo) : ViewModel(
     }
 
 
-
+    fun setBaseUrl(url:String) = myRepo.setBaseUrl(url)
+    fun getBaseUrl() :String = myRepo.getBaseUrl()
 
 
 }

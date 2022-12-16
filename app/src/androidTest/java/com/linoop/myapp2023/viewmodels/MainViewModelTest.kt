@@ -8,6 +8,7 @@ import com.linoop.myapp2023.getOrAwaitValue
 import com.linoop.myapp2023.models.LoginResponse
 import com.linoop.myapp2023.network.Api
 import com.linoop.myapp2023.repository.MyRepo
+import com.linoop.myapp2023.storage.MyPreference
 import com.linoop.myapp2023.storage.SharedPrefManager
 
 
@@ -32,6 +33,7 @@ import retrofit2.Response
 class MainViewModelTest : TestCase() {
 
     private lateinit var api: Api
+    private lateinit var myPreference: MyPreference
     private lateinit var viewModel: MainViewModel
 
     @get:Rule
@@ -43,11 +45,9 @@ class MainViewModelTest : TestCase() {
     @Before
     public override fun setUp() {
         context = mock()
-        val pref = mock<SharedPreferences>()
-        Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(pref)
-        val myPref = SharedPrefManager(pref)
         api = Mockito.mock(Api::class.java)
-        val myRepo = MyRepo(api, myPref)
+        myPreference = Mockito.mock(MyPreference::class.java)
+        val myRepo = MyRepo(api, myPreference)
         viewModel = MainViewModel(myRepo)
     }
 
@@ -81,5 +81,13 @@ class MainViewModelTest : TestCase() {
         result1?.let {
             assertThat(it.status).isFalse()
         }*/
+    }
+
+    @Test
+    fun saveBaseUrl(){
+        Mockito.`when`(myPreference.setBaseUrl("12345"))
+        Mockito.`when`(myPreference.getBaseUrl()).thenReturn("12345")
+        val result = viewModel.getBaseUrl()
+        assertThat(result).isEqualTo("12345")
     }
 }

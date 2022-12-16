@@ -4,13 +4,13 @@ import com.linoop.myapp2023.models.LoginResponse
 import com.linoop.myapp2023.models.SignUpResponse
 import com.linoop.myapp2023.models.UserModel
 import com.linoop.myapp2023.network.Api
-import com.linoop.myapp2023.storage.SharedPrefManager
+import com.linoop.myapp2023.storage.MyPreference
 import com.linoop.myapp2023.utils.FieldValidator
 import javax.inject.Inject
 
 class MyRepo @Inject constructor(
     private val api: Api,
-    private val sharedPrefManager: SharedPrefManager
+    private val sharedPrefManager: MyPreference
 ) {
 
 
@@ -58,6 +58,9 @@ class MyRepo @Inject constructor(
             } else LoginResponse(status = false, message = "Login Failed")
         }
     }
+
+    fun setBaseUrl(url: String) = sharedPrefManager.setBaseUrl(url)
+    fun getBaseUrl(): String = sharedPrefManager.getBaseUrl().toString().trim()
 
 
 }

@@ -17,7 +17,7 @@ data class UserModel(
     var email: String = "",
     var lastName:String=""
 
-) {
+){
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "item_id")
     var id: Int? = null

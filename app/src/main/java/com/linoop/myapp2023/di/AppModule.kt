@@ -1,12 +1,9 @@
 package com.linoop.myapp2023.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.room.Room
 import com.linoop.myapp2023.network.Api
-import com.linoop.myapp2023.storage.MyDatabase
-import com.linoop.myapp2023.storage.SharedPrefManager
-import com.linoop.myapp2023.storage.UrlInterceptor
+import com.linoop.myapp2023.storage.*
 import com.linoop.myapp2023.utils.Constants.BASE_URL
 import com.linoop.myapp2023.utils.Constants.DATABASE_NAME
 import com.linoop.myapp2023.utils.Constants.MY_PREF
@@ -54,11 +51,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideUrlInterceptor(sharedPrefManager: SharedPrefManager): Interceptor =
+    fun provideUrlInterceptor(sharedPrefManager: MyPreference): Interceptor =
         UrlInterceptor(sharedPrefManager)
 
 
-    @Singleton
+    /*@Singleton
     @Provides
     fun provideSharedPreferences(@ApplicationContext app: Context): SharedPreferences =
         app.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
@@ -66,7 +63,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideSharedPrefManager(sharedPreferences: SharedPreferences) =
-        SharedPrefManager(sharedPreferences)
+        SharedPrefManager(sharedPreferences)*/
 
+    @Singleton
+    @Provides
+    fun provideMyPreference(@ApplicationContext app: Context): MyPreference {
+        val pref = app.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
+        return MyPreferenceImpl(pref)
+    }
 
 }
