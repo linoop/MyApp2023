@@ -1,7 +1,6 @@
 package com.linoop.myapp2023.viewmodels
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.linoop.myapp2023.getOrAwaitValue
@@ -9,9 +8,6 @@ import com.linoop.myapp2023.models.LoginResponse
 import com.linoop.myapp2023.network.Api
 import com.linoop.myapp2023.repository.MyRepo
 import com.linoop.myapp2023.storage.MyPreference
-import com.linoop.myapp2023.storage.SharedPrefManager
-
-
 
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
@@ -84,10 +80,15 @@ class MainViewModelTest : TestCase() {
     }
 
     @Test
-    fun saveBaseUrl(){
-        Mockito.`when`(myPreference.setBaseUrl("12345"))
-        Mockito.`when`(myPreference.getBaseUrl()).thenReturn("12345")
+    fun testBaseUrl(){
+        saveBaseUrl("12345")
+    }
+    fun saveBaseUrl(baseUrl: String){
+        Mockito.`when`(myPreference.setBaseUrl(baseUrl)).thenReturn(true)
+        Mockito.`when`(myPreference.getBaseUrl()).thenReturn(baseUrl)
         val result = viewModel.getBaseUrl()
-        assertThat(result).isEqualTo("12345")
+        val setResult = viewModel.setBaseUrl(baseUrl)
+        assertThat(setResult).isEqualTo(true)
+        assertThat(result).isEqualTo(baseUrl)
     }
 }
